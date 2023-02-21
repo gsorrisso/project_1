@@ -7,39 +7,56 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <title>Dashboard</title>
 </head>
-<body>  
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: grey; text-decoration: aliceblue;">
-        <div class="container-fluid">
-            <a class="navbar-brand">Welcome {{ user.first_name }}</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                <a class="nav-link active" href="/new_comment">Add Comment</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/user/logout">Logout</a>
-                </li>
-            </ul>
+
+<style>
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 100px;
+        background-image: url("{{ url_for('static',filename='darren-nunis-cxE7SXKnzv0-unsplash.jpg') }}");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100vh;
+    }
+</style>
+<body>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: grey; text-decoration: aliceblue;">
+            <div class="container-fluid">
+                <a class="navbar-brand">Welcome {{ user.first_name }}</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" href="/new_comment">Add Comment</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/user/logout">Logout</a>
+                    </li>
+                </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-    <br>
-    <h3>Bridal party comments:</h3>
-    
-    <table class="table table-striped">
-        <tr>
-            <th>Description</th>
-            <th>Posted By</th>
-        </tr>
-
-        {% for comment in comment %}
+        </nav>
+        <br>
+        <div class="container"> 
+        <h3>Bridal party comments:</h3>
+        
+        <table class="table table-striped">
             <tr>
-                <td>{{ comment.description }}</td>
-                <td>{{ comment.current_user.first_name }}</td>
-                <td><a href="/user/edit_comment/{{ comment.id }}"> Edit</a>||<a href="/delete_comment/{{ comment.id }}"> Delete</a></td>
+                <th>Description</th>
+                <th>Posted By</th>
+                <th>User ID</th>
             </tr>
-        {% endfor %}
-    </table>
 
+            {% for comment in comment %}
+                <tr>
+                    <td>{{ comment.description }}</td>
+                    <td>{{ comment.current_user.first_name }}</td>
+                    <td>{{ comment.current_user.id }}</td>
+                    <td><a href="/user/edit_comment/{{ comment.id }}"> Edit</a>||<a href="/delete_comment/{{ comment.id }}"> Delete</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        </div>
 </body>
 </html>

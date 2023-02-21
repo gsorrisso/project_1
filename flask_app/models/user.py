@@ -19,7 +19,7 @@ class User:
     @classmethod
     def get_id(cls, data):
 
-        query = "SELECT * FROM weddingProject.users WHERE id = %(id)s;"
+        query = "SELECT * FROM users WHERE id = %(id)s;"
 
         results = connectToMySQL('weddingProject').query_db(query, data)
         return cls(results[0]) if results else None
@@ -27,7 +27,7 @@ class User:
     @classmethod
     def get_email(cls, data):
 
-        query = "SELECT * FROM weddingProject.users WHERE email_address = %(email_address)s;"
+        query = "SELECT * FROM users WHERE email_address = %(email_address)s;"
 
         result = connectToMySQL('weddingProject').query_db(query, data)
         
@@ -79,6 +79,6 @@ class User:
     
     @classmethod # this saves the data and updates the database with new information
     def save(cls, data):
-        query = 'INSERT INTO weddingProject.users (first_name, last_name, email_address, password) VALUES (%(first_name)s, %(last_name)s, %(email_address)s, %(password)s);'
+        query = 'INSERT INTO users (first_name, last_name, email_address, password) VALUES (%(first_name)s, %(last_name)s, %(email_address)s, %(password)s);'
 
         return connectToMySQL("weddingProject").query_db(query, data)

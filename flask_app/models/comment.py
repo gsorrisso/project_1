@@ -20,7 +20,7 @@ class Comment:
 
     @classmethod 
     def get_all_comments(cls):
-        query = "SELECT * FROM weddingProject.comments JOIN users on comments.user_id = users.id;"
+        query = "SELECT * FROM comments JOIN users on comments.user_id = users.id;"
         results = connectToMySQL("weddingProject").query_db(query)
 
         comments=[]
